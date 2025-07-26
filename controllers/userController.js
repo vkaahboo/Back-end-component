@@ -32,7 +32,7 @@ const addUser = async (req,res) =>{
 const getUserById = async (req,res) =>{
     try {
         const userId = req.params.idUser;
-        const user = await userModel.findById(userId).populate("favouriteHabit");
+        const user = await userModel.findById(userId).populate({ path: "favouriteHabit", select: "habitName description"});
         if(!user){
              res.status(200).send({ status: 'No existe el usuario' }); 
         }
@@ -94,8 +94,37 @@ const addFavouriteRoutine = async (req, res) => {
             return res.status(200).send({ status: 'No existe el registro del hábito' });
         }
 
+        if(user.favouriteHabit.includes(idHabit)){
+            return res.status(200).send({ status: 'La rutina diaria ya está en favoritos' });
+        }
+
+
         user.favouriteHabit.push(idHabit);
         user.save()
+
+        res.status(200).send({ status: "Success", data: user });
+
+    } catch (error) {
+        res.status(500).send({ status:"Failed", error: error.message });
+    }
+}
+
+
+const removeFavouriteRoutine = async (req, res) =>{
+    try {
+        const { idUser, idHabit } = req.params; 
+        const user = await userModel.findById(idUser);
+        if(!user){
+            return res.status(200).send({ status: 'No existe el usuario' });
+        }
+
+        if(!user.favouriteHabit.includes(idHabit)){
+            return res.status(200).send({ status: 'La rutina diaria NO está en favoritos' });
+        }
+
+        //pull me elimina array
+        user.favouriteHabit.pull(idHabit);
+        user.save();
 
         res.status(200).send({ status: "Success", data: user });
 
@@ -110,5 +139,6 @@ module.exports = {
     getUserById,
     deleteUSer,
     updateUser,
-    addFavouriteRoutine
+    addFavouriteRoutine,
+    removeFavouriteRoutine
 };

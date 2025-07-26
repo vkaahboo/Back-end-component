@@ -6,7 +6,8 @@ const {
     getUserById,
     deleteUSer,
     updateUser,
-    addFavouriteRoutine
+    addFavouriteRoutine,
+    removeFavouriteRoutine
 } = require("../controllers/userController");
 
 //RUTAS
@@ -16,7 +17,9 @@ router.get("/:idUser", getUserById);
 router.delete("/:idUser", deleteUSer);
 router.patch("/:idUser", updateUser);
 
-router.patch("/:idUser/diaryHabits/:idHabit", addFavouriteRoutine)
+//rutinas favoritas
+router.patch("/:idUser/diaryHabits/:idHabit", addFavouriteRoutine);
+router.delete("/:idUser/diaryHabits/:idHabit", removeFavouriteRoutine);
 
 
 
