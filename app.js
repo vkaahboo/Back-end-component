@@ -7,6 +7,7 @@ const userRouter = require('./routers/userRouter')
 const habitRouter = require('./routers/habitsRouter')
 const loginRouter = require('./routers/loginRouter')
 
+
 //para acceder a las variales de entorno
 require("dotenv").config();
 const connectToDatabase = require('./db/connectDb');
@@ -22,6 +23,7 @@ connectToDatabase();
 app.use('/api/user', userRouter);
 app.use('/api/habit', habitRouter);
 app.use('/api/auth', loginRouter);
+
 
 
 

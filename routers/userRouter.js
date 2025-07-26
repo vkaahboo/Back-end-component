@@ -2,26 +2,12 @@ const express = require("express");
 const router = express.Router();
 const {
     getAllUser,
-    getUserById,
-    deleteUSer,
-    updateUser,
-    addFavouriteRoutine,
-    removeFavouriteRoutine
+    getUserById
 } = require("../controllers/userController");
 
 //RUTAS
 router.get("/", getAllUser);
 router.get("/:idUser", getUserById);
-router.delete("/:idUser", deleteUSer);
-router.patch("/:idUser", updateUser);
-
-//rutinas favoritas
-router.patch("/:idUser/diaryHabits/:idHabit", addFavouriteRoutine);
-router.delete("/:idUser/diaryHabits/:idHabit", removeFavouriteRoutine);
-
-
-
-
 
 module.exports = router;
 
