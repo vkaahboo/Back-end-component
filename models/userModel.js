@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const dayjs = require('dayjs');
 
 const Schema = mongoose.Schema;
 
@@ -26,9 +27,13 @@ const userSchema = new Schema({
     enum: ["user"],
     default: "user"
   },
-},{
-    timestamps: true
-  });
+  favouriteHabit: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'Habit',
+        required: true
+  }
+});
+
 
 /*
 userSchema.pre(/^find/, function (next){
