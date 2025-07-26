@@ -3,13 +3,24 @@ const router = express.Router();
 const {
     addUser,
     getAllUser,
-    getUserById
+    getUserById,
+    deleteUSer,
+    updateUser,
+    addFavouriteRoutine
 } = require("../controllers/userController");
 
 //RUTAS
 router.post("/", addUser);
 router.get("/", getAllUser);
 router.get("/:idUser", getUserById);
+router.delete("/:idUser", deleteUSer);
+router.patch("/:idUser", updateUser);
+
+router.patch("/:idUser/diaryHabits/:idHabit", addFavouriteRoutine)
+
+
+
+
 
 module.exports = router;
 
