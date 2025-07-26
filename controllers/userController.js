@@ -11,17 +11,8 @@ const getAllUser = async (req,res) =>{
         res.status(500).send({ status:"Failed", error: error.message })
     }
 };
-
-
-const addUser = async (req,res) =>{
-    try {
-        const newUser = req.body;
-        await userModel.create(newUser);
-        res.status(200).send({ status: 'Usuario creado exitosamente' });  
-    } catch (error) {
-        res.status(500).send({ status:"Failed", error: error.message });
-    }
-};
+//obtener usuario por Id
+//populate para que me muestre la info de la rutina, no solo el id
 
 const getUserById = async (req,res) =>{
     try {
@@ -40,7 +31,6 @@ const getUserById = async (req,res) =>{
 
 
 module.exports = {
-    addUser,
     getAllUser,
     getUserById
 };
