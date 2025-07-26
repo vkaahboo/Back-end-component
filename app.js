@@ -5,7 +5,7 @@ const cors = require('cors')
 //rutas de ficheros
 const userRouter = require('./routers/userRouter')
 const habitRouter = require('./routers/habitsRouter')
-//const loginRouter = require('./routers/loginRouter')
+const loginRouter = require('./routers/loginRouter')
 
 //para acceder a las variales de entorno
 require("dotenv").config();
@@ -21,7 +21,7 @@ connectToDatabase();
 //URLS
 app.use('/api/user', userRouter);
 app.use('/api/habit', habitRouter);
-//app.use('/api/auth', loginRouter)
+app.use('/api/auth', loginRouter);
 
 
 

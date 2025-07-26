@@ -15,18 +15,6 @@ const getAllUser = async (req,res) =>{
 };
 
 
-//crear usuario
-const addUser = async (req,res) =>{
-    try {
-        const newUser = req.body;
-        await userModel.create(newUser);
-        res.status(200).send({ status: 'Usuario creado exitosamente' });  
-    } catch (error) {
-        res.status(500).send({ status:"Failed", error: error.message });
-    }
-};
-
-
 //obtener usuario por Id
 //populate para que me muestre la info de la rutina, no solo el id
 const getUserById = async (req,res) =>{
@@ -134,7 +122,6 @@ const removeFavouriteRoutine = async (req, res) =>{
 }
 
 module.exports = {
-    addUser,
     getAllUser,
     getUserById,
     deleteUSer,

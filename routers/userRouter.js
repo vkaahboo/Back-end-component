@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const {
-    addUser,
     getAllUser,
     getUserById,
     deleteUSer,
@@ -11,7 +10,6 @@ const {
 } = require("../controllers/userController");
 
 //RUTAS
-router.post("/", addUser);
 router.get("/", getAllUser);
 router.get("/:idUser", getUserById);
 router.delete("/:idUser", deleteUSer);
