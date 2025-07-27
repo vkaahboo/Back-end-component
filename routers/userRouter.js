@@ -8,10 +8,11 @@ const {
     addFavouriteRoutine,
     removeFavouriteRoutine
 } = require("../controllers/userController");
+const verifyToken = require("../middlewares/auth");
 
 //RUTAS
 router.get("/", getAllUser);
-router.get("/:idUser", getUserById);
+router.get("/", verifyToken, getUserById);
 router.delete("/:idUser", deleteUSer);
 router.patch("/:idUser", updateUser);
 

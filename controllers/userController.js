@@ -19,7 +19,7 @@ const getAllUser = async (req,res) =>{
 //populate para que me muestre la info de la rutina, no solo el id
 const getUserById = async (req,res) =>{
     try {
-        const userId = req.params.idUser;
+        const userId = req.payload._id;
         const user = await userModel.findById(userId).populate({ path: "favouriteHabit", select: "habitName description"});
         if(!user){
              res.status(200).send({ status: 'No existe el usuario' }); 
