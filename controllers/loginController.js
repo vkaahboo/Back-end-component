@@ -1,6 +1,7 @@
 const userModel = require("../models/userModel");
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
+const generateToken = require("../utils/authToken")
 
 //registro user
 const signup = async (req,res) => {
@@ -43,8 +44,8 @@ const login = async (req,res) =>{
             role: user.role
         }
 
-        const token = jwt.sign(payload, process.env.SECRET_TOKEN, { expiresIn: "15" });
-        const tokenRefresh = jwt.sign(payload, process.env.SECRET_TOKEN_REFRESH, { expiresIn: "60" })
+        const token = generateToken(payload, false)
+        const tokenRefresh = generateToken(payload, true)
 
         res.status(200).send({ status: "Success", data: user, token: token, tokenRefresh});
 
