@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const {
     getAllUser,
-    getUserById,
+    getProfileUser,
     deleteUSer,
     updateUser,
     addFavouriteRoutine,
@@ -12,9 +12,9 @@ const verifyToken = require("../middlewares/auth");
 
 //RUTAS
 router.get("/", getAllUser);
-router.get("/", verifyToken, getUserById);
-router.delete("/:idUser", deleteUSer);
-router.patch("/:idUser", updateUser);
+router.get("/profileUser", verifyToken, getProfileUser);
+router.delete("/profileUser", verifyToken, deleteUSer);
+router.patch("/profileUser", verifyToken, updateUser);
 
 //rutinas favoritas
 router.patch("/:idUser/diaryHabits/:idHabit", addFavouriteRoutine);
