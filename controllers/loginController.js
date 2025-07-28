@@ -44,8 +44,8 @@ const login = async (req,res) =>{
             role: user.role
         }
 
-        const token = generateToken(payload, false)
-        const tokenRefresh = generateToken(payload, true)
+        const token = generateToken(payload, false);
+        const tokenRefresh = generateToken(payload, true);
 
         res.status(200).send({ status: "Success", data: user, token: token, tokenRefresh});
 
@@ -53,6 +53,8 @@ const login = async (req,res) =>{
         res.status(500).send({ status: "Failed", error: error.message })
     }
 }
+
+
 
 module.exports = {
     signup,

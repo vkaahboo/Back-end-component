@@ -26,6 +26,37 @@ const addHabit = async (req,res) =>{
     }
 };
 
+//borrar habito
+const deleteUser = async (req, res) =>{
+    try {
+        const userId = req.payload._id
+        const user = await habitsModel.findByIdAndDelete(userId)
+        if(!user){
+            return res.status(200).send('No existe ese ID')
+        }
+        res.status(200).send({ status: 'Success', data: 'Se ha eliminado correctamente' })
+    } catch (error) {
+        res.status(500).send({ status: 'Failed', error: error.message })
+    }
+}
+
+//desactivar habito
+const deactivateHabit = async (req,res) => {
+    try {
+        const userId = req.payload._id
+        const user = await habitsModel.findByIdAndUpdate(userId, { completedHabit: false }, { new: true})
+
+        if(!user){
+            return res.status(200).send('No hay usuario')
+        }
+
+        res.status(200).send({ status: 'Success', message: 'Usuario desactivado completamente' })
+    } catch (error) {
+        res.status(500).send({ status: 'Failed', error: error.message })
+    }
+}
+
+
 module.exports = {
     addHabit,
     getAllHabits

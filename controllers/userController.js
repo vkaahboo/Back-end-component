@@ -17,7 +17,7 @@ const getAllUser = async (req,res) =>{
 
 //obtener usuario por Id
 //populate para que me muestre la info de la rutina, no solo el id
-const getUserById = async (req,res) =>{
+const getProfileUser = async (req,res) =>{
     try {
         const userId = req.payload._id;
         const user = await userModel.findById(userId).populate({ path: "favouriteHabit", select: "habitName description"});
@@ -34,7 +34,7 @@ const getUserById = async (req,res) =>{
 //eliminar usuario
 const deleteUSer = async (req,res) =>{
     try {
-        const userId = req.params.idUser;
+        const userId = req.payload._id;
         const user = await userModel.findByIdAndDelete(userId)
         if(!user){
              res.status(200).send({ status: 'No existe el usuario' }); 
@@ -48,7 +48,7 @@ const deleteUSer = async (req,res) =>{
 //Actualizar usuario
 const updateUser = async (req,res) =>{
     try {
-        const userId = req.params.idUser;
+        const userId = req.payload._id;
         const newUser = req.body;
         const update = await userModel.findByIdAndUpdate(
             userId,
@@ -123,7 +123,7 @@ const removeFavouriteRoutine = async (req, res) =>{
 
 module.exports = {
     getAllUser,
-    getUserById,
+    getProfileUser,
     deleteUSer,
     updateUser,
     addFavouriteRoutine,
